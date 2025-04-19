@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\PageController;
+use App\Http\Controllers\auth\AdminUserController;
+use App\Http\Controllers\backend\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,8 @@ use App\Http\Controllers\frontend\PageController;
 */
 
 Route::get('/', [PageController::class, 'index']);
-
+Route::get('/admin/login', [AdminUserController::class, 'showLoginForm']);
+Route::post('/admin/login', [AdminUserController::class, 'login'])->name('admin.login');
+Route::resource('/admin', DashboardController::class);
 Auth::routes();
 
