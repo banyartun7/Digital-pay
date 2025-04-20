@@ -10,11 +10,13 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="msapplication-tap-highlight" content="no">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css">
     <script defer src="{{ asset('/assets/scripts/main.js') }}"></script>
     <script defer src="{{ asset('/assets/scripts/demo.js') }}"></script>
     <script defer src="{{ asset('/assets/scripts/toastr.js') }}"></script>
     <script defer src="{{ asset('/assets/scripts/scrollbar.js') }}"></script>
+    <link rel = "stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="https://kit.fontawesome.com/225a355f8f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -398,7 +400,7 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                    <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                                    <i class="fa-solid fa-desktop"></i>
                                     </i>
                                 </div>
                                 <div>{{ $header }}
@@ -417,6 +419,26 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <!-- Javascript Requirements -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Laravel Javascript Validation -->
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    @yield('datatable')
+    <script>
+        $(document).ready(function() {
+            $('.btn-back').on('click', function() {
+                window.history.go(-1);
+                return false;
+            })
+        })
+    </script>
 </body>
 
 </html>
