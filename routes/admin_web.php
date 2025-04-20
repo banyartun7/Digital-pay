@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\frontend\PageController;
-use App\Http\Controllers\auth\AdminUserController;
 use App\Http\Controllers\backend\DashboardController;
 
 /*
@@ -15,14 +13,8 @@ use App\Http\Controllers\backend\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(function () {
+  Route::resource('/', DashboardController::class);  
+});
 
-Route::get('/', [PageController::class, 'index']);
-
-//Admin auth
-Route::get('/admin/login', [AdminUserController::class, 'showLoginForm']);
-Route::post('/admin/login', [AdminUserController::class, 'login'])->name('admin.login');
-Route::post('/admin/logout', [AdminUserController::class, 'logout'])->name('admin.logout');
-
-//User auth
-Auth::routes();
 
