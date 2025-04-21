@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminUserRequest;
 use App\Http\Requests\AdminUserUpdateRequest;
+use Jenssegers\Agent\Agent;
 
 class AdminController extends Controller
 {
@@ -16,8 +17,15 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $agent = new Agent();
         $admins = AdminUser::latest()->get();
-        return view('backend.admin.index',compact('admins'));
+        foreach($admins as $admin){
+            $agent->setUserAgent($admin->user_agent);
+            $device = $agent->device();
+            $platform = $agent->platform();
+            $browser = $agent->browser();
+        }
+        return view('backend.admin.index',compact('admins','agent'));
     }
 
     /**

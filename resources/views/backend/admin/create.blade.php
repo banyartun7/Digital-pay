@@ -2,6 +2,7 @@
     <x-slot name="title">
         <title>Create Admin</title>
     </x-slot>
+    @section('active', 'mm-active')
     <x-slot name="header">Create Admin</x-slot>
     <x-card-wrapper>
         <form action="{{ route('admin.admin-user.store') }}" method="POST" id="create">

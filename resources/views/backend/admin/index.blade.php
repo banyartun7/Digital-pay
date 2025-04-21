@@ -17,6 +17,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Ip</th>
+                    <th>User Agent</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -26,17 +28,53 @@
                         <td>{{ $admin->name }}</td>
                         <td>{{ $admin->email }}</td>
                         <td>{{ $admin->phone }}</td>
+                        <td>{{ $admin->ip }}</td>
+                        <td>
+                            @if ($admin->user_agent)
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Device</th>
+                                        <td>
+                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            $device = $agent->device();
+                                            echo $device;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Platform</th>
+                                        <td>
+                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            $platform = $agent->platform();
+                                            echo $platform;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Browser</th>
+                                        <td>
+                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            $browser = $agent->browser();
+                                            echo $browser;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('admin.admin-user.edit', $admin->id) }}" style="margin-right:15px"
                                 class="icon text-warning">
-                                <i style="font-size:23px" class="fa-solid fa-user-pen"></i></a> |
+                                <i style="font-size:20px" class="fa-solid fa-user-pen"></i></a> |
                             <form action="{{ route('admin.admin-user.destroy', $admin->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button style="margin-left:25px"
+                                <button onclick="return confirm('Are you sure to delete?')" style="margin-left:25px"
                                     class="text-danger
                                 border-0" type="submit">
-                                    <i style="font-size:23px" class="fa-solid fa-trash"></i>
+                                    <i style="font-size:20px" class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
                         </td>

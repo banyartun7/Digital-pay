@@ -2,6 +2,7 @@
     <x-slot name="title">
         <title>Edit Admin</title>
     </x-slot>
+    @section('active', 'mm-active')
     <x-slot name="header">Edit Admin</x-slot>
     <x-card-wrapper>
         <form action="{{ route('admin.admin-user.update', $adminUser->id) }}" method="POST" id="edit">
