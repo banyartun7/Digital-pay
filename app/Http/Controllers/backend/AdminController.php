@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminUserRequest;
+use App\Http\Requests\AdminUserUpdateRequest;
 
 class AdminController extends Controller
 {
@@ -32,13 +33,8 @@ class AdminController extends Controller
      */
     public function store(AdminUserRequest $request)
     {
-        $admin_user = new AdminUser();
-        $admin_user->name = $request->name;
-        $admin_user->email = $request->email;
-        $admin_user->phone = $request->phone;
-        $admin_user->password = Hash::make($request->password);
-        $admin_user->save();
-        return redirect('/admin/admin-user');
+        AdminUser::create($request->validated());
+        return redirect('/admin/admin-user')->with('create', config('alert.admin.create'));
     }
 
     /**
@@ -52,24 +48,26 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(AdminUser $adminUser)
     {
-        //
+        return view('backend.admin.edit', compact('adminUser'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AdminUserUpdateRequest $request, AdminUser $adminUser)
     {
-        //
+        $adminUser->update($request->validated() + ['password' => empty($request->password) ? $adminUser->password : $request->password]);
+        return redirect('/admin/admin-user')->with('update', config('alert.admin.update'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(AdminUser $adminUser)
     {
-        //
+        $adminUser->delete();
+        return redirect('/admin/admin-user')->with('delete', config('alert.admin.delete'));
     }
 }

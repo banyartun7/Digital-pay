@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminUserRequest extends FormRequest
+class AdminUserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class AdminUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('admin_user');
         return [
             'name' => 'required|min:3|max:255',
-            'email' => ['required', 'email', 'min:10', Rule::unique('admin_users', 'email')],
-            'phone' => ['required', 'min:9', 'numeric', Rule::unique('admin_users', 'phone')],
-            'password' => 'required|min:8'
+            'email' => ['required', 'email', 'min:10', Rule::unique('admin_users', 'email')->ignore($id)],
+            'phone' => ['required', 'min:9', 'numeric', Rule::unique('admin_users', 'phone')->ignore($id)],
         ];
     }
 }

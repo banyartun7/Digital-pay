@@ -17,6 +17,7 @@
     <script defer src="{{ asset('/assets/scripts/scrollbar.js') }}"></script>
     <link rel = "stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://kit.fontawesome.com/225a355f8f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -437,6 +438,37 @@
                 window.history.go(-1);
                 return false;
             })
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            @if (session('create'))
+                Toast.fire({
+                    icon: "success",
+                    title: "{{ session('create') }}"
+                });
+            @endif
+
+            @if (session('delete'))
+                Toast.fire({
+                    icon: "delete",
+                    title: "{{ session('delete') }}"
+                });
+            @endif
+
+            @if (session('update'))
+                Toast.fire({
+                    icon: "update",
+                    title: "{{ session('update') }}"
+                });
+            @endif
         })
     </script>
 </body>

@@ -11,4 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 class AdminUser extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public function getNameAttribute($value){
+        return ucwords($value);
+    }
+    
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

@@ -34,12 +34,12 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Dashboards</li>
                 <li>
-                    <a href="/admin" class="mm-active">
-                        <i class="fa-solid fa-rocket"></i>
+                    <a href="/admin" class="@yield('home-active')">
+                        <i style="padding-right:10px" class="fa-solid fa-rocket"></i>
                         Dashboard
                     </a>
-                    <a href="{{ route('admin.admin-user.index') }}" class="mm-active">
-                        <i class="fa-solid fa-user"></i>
+                    <a href="{{ route('admin.admin-user.index') }}" class="@yield('active')">
+                        <i style="padding-right:10px" class="fa-solid fa-user"></i>
                         Admin Management
                     </a>
                 </li>

@@ -4,7 +4,7 @@
     </x-slot>
     <x-slot name="header">Create Admin</x-slot>
     <x-card-wrapper>
-        <form action="{{ route('admin.admin-user.store') }}" method="POST">
+        <form action="{{ route('admin.admin-user.store') }}" method="POST" id="create">
             @csrf
             <x-form.input name="name" />
             <x-form.input name="email" type="email" />
@@ -19,6 +19,6 @@
         </form>
     </x-card-wrapper>
     @section('datatable')
-        {!! JsValidator::formRequest('App\Http\Requests\AdminUserRequest') !!}
+        {!! JsValidator::formRequest('App\Http\Requests\AdminUserRequest', '#create') !!}
     @endsection
 </x-admin_layouts>
