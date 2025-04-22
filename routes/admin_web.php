@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\DashboardController;
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\backend\DashboardController;
 Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(function () {
   Route::resource('/', DashboardController::class);  
   Route::resource('admin-user', AdminController::class);
+
+  Route::resource('user', UserController::class);
 });
 
 

@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-
+     public function getNameAttribute($value){
+        return ucwords($value);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

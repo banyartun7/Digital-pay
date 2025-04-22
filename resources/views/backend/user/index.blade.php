@@ -1,13 +1,13 @@
 <x-admin_layouts>
     <x-slot name="title">
-        <title>Admin User</title>
+        <title>User Form</title>
     </x-slot>
-    <x-slot name="header">Admin User</x-slot>
-    @section('active', 'mm-active')
+    <x-slot name="header">User Form</x-slot>
+    @section('user-active', 'mm-active')
     <div>
-        <a href="{{ route('admin.admin-user.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">
             <i style="margin-right:7px" class="fa-solid fa-user-plus"></i>
-            Create Admin
+            Create User
         </a>
     </div>
     <x-card-wrapper>
@@ -20,24 +20,24 @@
                     <th class="no-sort">Ip</th>
                     <th class="no-sort">User Agent</th>
                     <th class="no-sort">Created_at</th>
-                    <th class="no-sort">Updated_at</th>
+                    <th class="no-sort">Login_at</th>
                     <th class="no-sort">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($admins as $admin)
+                @foreach ($users as $user)
                     <tr>
-                        <td>{{ $admin->name }}</td>
-                        <td>{{ $admin->email }}</td>
-                        <td>{{ $admin->phone }}</td>
-                        <td>{{ $admin->ip }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->phone }}</td>
+                        <td>{{ $user->ip }}</td>
                         <td>
-                            @if ($admin->user_agent)
+                            @if ($user->user_agent)
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>Device</th>
                                         <td>
-                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            <?php $agent->setUserAgent($user->user_agent);
                                             echo $agent->device();
                                             ?>
                                         </td>
@@ -45,7 +45,7 @@
                                     <tr>
                                         <th>Platform</th>
                                         <td>
-                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            <?php $agent->setUserAgent($user->user_agent);
                                             echo $agent->platform();
                                             ?>
                                         </td>
@@ -53,7 +53,7 @@
                                     <tr>
                                         <th>Browser</th>
                                         <td>
-                                            <?php $agent->setUserAgent($admin->user_agent);
+                                            <?php $agent->setUserAgent($user->user_agent);
                                             echo $agent->browser();
                                             ?>
                                         </td>
@@ -63,14 +63,14 @@
                                 -
                             @endif
                         </td>
-                        <td>{{ $admin->created_at->diffForHumans() }}</td>
-                        <td>{{ $admin->updated_at->diffForHumans() }}</td>
+                        <td>{{ $user->created_at->diffForHumans() }}</td>
+                        <td>{{ $user->updated_at->diffForHumans() }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
-                                <a href="{{ route('admin.admin-user.edit', $admin->id) }}" style="margin-right:15px"
+                                <a href="{{ route('admin.user.edit', $user->id) }}" style="margin-right:15px"
                                     class="icon text-warning">
                                     <i style="font-size:20px" class="fa-solid fa-user-pen"></i></a> |
-                                <form action="{{ route('admin.admin-user.destroy', $admin->id) }}" method="POST">
+                                <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Are you sure to delete?')" style="margin-left:25px"

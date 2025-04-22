@@ -19,12 +19,6 @@ class AdminController extends Controller
     {
         $agent = new Agent();
         $admins = AdminUser::latest()->get();
-        foreach($admins as $admin){
-            $agent->setUserAgent($admin->user_agent);
-            $device = $agent->device();
-            $platform = $agent->platform();
-            $browser = $agent->browser();
-        }
         return view('backend.admin.index',compact('admins','agent'));
     }
 

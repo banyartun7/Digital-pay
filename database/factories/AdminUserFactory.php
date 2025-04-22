@@ -22,7 +22,7 @@ class AdminUserFactory extends Factory
         return [
             'name' => 'Banyar',
             'email' => 'banyar@gmail.com',
-            'password' => static::$password ??= Hash::make('12345678'),
+            'password' => '12345678',
             'phone' => '0977777777'
         ];
     }

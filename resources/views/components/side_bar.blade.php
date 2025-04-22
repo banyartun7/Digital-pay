@@ -42,6 +42,10 @@
                         <i style="padding-right:10px" class="fa-solid fa-user"></i>
                         Admin Management
                     </a>
+                    <a href="{{ route('admin.user.index') }}" class="@yield('user-active')">
+                        <i style="padding-right:10px" class="fa-solid fa-user"></i>
+                        User Management
+                    </a>
                 </li>
             </ul>
         </div>
