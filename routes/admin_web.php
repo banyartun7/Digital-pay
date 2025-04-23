@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\WalletController;
 use App\Http\Controllers\backend\DashboardController;
 
 /*
@@ -20,6 +21,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin_user')->group(fun
   Route::resource('admin-user', AdminController::class);
 
   Route::resource('user', UserController::class);
+
+  Route::get('wallet', [WalletController::class, 'index'])->name('wallet.index');
 });
 
 

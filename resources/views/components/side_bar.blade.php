@@ -46,6 +46,10 @@
                         <i style="padding-right:10px" class="fa-solid fa-user"></i>
                         User Management
                     </a>
+                    <a href="{{ route('admin.wallet.index') }}" class="@yield('wallet-active')">
+                        <i style="padding-right:10px" class="fa-solid fa-user"></i>
+                        Wallets
+                    </a>
                 </li>
             </ul>
         </div>
