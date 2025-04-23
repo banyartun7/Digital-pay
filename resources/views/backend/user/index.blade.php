@@ -63,8 +63,8 @@
                                 -
                             @endif
                         </td>
-                        <td>{{ $user->created_at->diffForHumans() }}</td>
-                        <td>{{ $user->updated_at->diffForHumans() }}</td>
+                        <td>{{ date('Y-m-d H:i:s', strtotime($user->created_at)) }}</td>
+                        <td>{{ date('Y-m-d H:i:s', strtotime($user->updated_at)) }}</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center">
                                 <a href="{{ route('admin.user.edit', $user->id) }}" style="margin-right:15px"

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\backend;
 
 use App\Models\User;
+use App\Models\Wallet;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use App\Helpers\UUIDGenerate;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 
@@ -34,8 +37,23 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        User::create($request->validated());
-        return redirect('/admin/user')->with('create', config('alert.user.create'));
+        DB::beginTransaction();
+        try {
+            $user = User::create($request->validated());
+            Wallet::firstOrCreate(
+            [
+            'user_id' => $user->id
+            ], 
+            [
+            'account_number' => UUIDGenerate::accountNumber(),
+            ]);
+            DB::commit();     
+            return redirect('/admin/user')->with('create', config('alert.user.create'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail'=>'Something wrong'])->withInput();
+        }
+        
     }
 
     /**
@@ -59,8 +77,23 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $user->update($request->validated() + ['password' => empty($request->password) ? $user->password : $request->password]);
-        return redirect('/admin/user')->with('update', config('alert.user.update'));
+        DB::beginTransaction();
+        try {
+            $user->update($request->validated() + ['password' => empty($request->password) ? $user->password : $request->password]);
+            Wallet::firstOrCreate(
+                [
+                'user_id' => $user->id
+                ], 
+                [
+                'account_number' => UUIDGenerate::accountNumber(),
+                ]);
+                DB::commit(); 
+                return redirect('/admin/user')->with('update', config('alert.user.update'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail'=>'Something wrong'])->withInput();
+        }
+        
     }
 
     /**

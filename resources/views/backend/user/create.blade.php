@@ -4,6 +4,9 @@
     </x-slot>
     @section('user-active', 'mm-active')
     <x-slot name="header">Create User Form</x-slot>
+    @error('fail')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <x-card-wrapper>
         <form action="{{ route('admin.user.store') }}" method="POST" id="create">
             @csrf
