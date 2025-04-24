@@ -16,7 +16,7 @@ use App\Http\Controllers\backend\DashboardController;
 |
 */
 
-Route::get('/', [PageController::class, 'index']);
+Route::get('/', [PageController::class, 'index'])->middleware('auth');
 
 //Admin auth
 Route::get('/admin/login', [AdminUserController::class, 'showLoginForm']);
