@@ -15,8 +15,11 @@ use App\Http\Controllers\backend\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware('auth')->group(function () {
+    Route::get('/', [PageController::class, 'index'])->name('home');  
+    Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+});
 
-Route::get('/', [PageController::class, 'index'])->middleware('auth');
 
 //Admin auth
 Route::get('/admin/login', [AdminUserController::class, 'showLoginForm']);

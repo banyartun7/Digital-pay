@@ -1,3 +1,4 @@
+<!--
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -9,14 +10,14 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
+             Left Side Of Navbar 
             <ul class="navbar-nav me-auto">
 
             </ul>
 
-            <!-- Right Side Of Navbar -->
+            Right Side Of Navbar 
             <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
+                Authentication Links 
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
@@ -50,6 +51,23 @@
                     </li>
                 @endguest
             </ul>
+        </div>
+    </div>
+</nav>
+-->
+
+<nav class="navbar navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}"> @yield('header') </a>
+        <div class="user-info">
+            <i class="fa-solid fa-bell"></i>
+
+            <img
+                width="42"
+                class="rounded-circle"
+                src="https://ui-avatars.com/api/?name=aungaung"
+                alt=""
+            />
         </div>
     </div>
 </nav>
