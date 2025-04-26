@@ -65,7 +65,7 @@
             <img
                 width="42"
                 class="rounded-circle"
-                src="https://ui-avatars.com/api/?name=aungaung"
+                src="https://ui-avatars.com/api/?name={{auth()->guard('web')->user()->name}}"
                 alt=""
             />
         </div>

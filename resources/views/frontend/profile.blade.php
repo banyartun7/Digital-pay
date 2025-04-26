@@ -5,7 +5,7 @@
     @section('header', 'Profile')
     <div class="profile">
         <img
-            src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=Banyar"
+            src="https://ui-avatars.com/api/?background=5842e3&color=fff&name={{auth()->guard('web')->user()->name}}"
         />
     </div>
     <x-card-wrapper>
@@ -26,13 +26,16 @@
     </x-card-wrapper>
 
     <x-card-wrapper>
-        <div class="d-flex text-select justify-content-between">
-            <span>Password</span>
+        <a
+            href="{{ route('update_pass') }}"
+            class="d-flex text-select justify-content-between"
+        >
+            <span class="update">Update Password</span>
             <i class="fa-solid fa-arrow-right"></i>
-        </div>
+        </a>
         <hr />
         <div class="d-flex text-select justify-content-between logout">
-            <span>Logout</span>
+            <span class="update">Logout</span>
             <i class="fa-solid logout fa-arrow-right"></i>
         </div>
     </x-card-wrapper>
@@ -46,8 +49,9 @@
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
+                    cancelButtonColor: "#6C757D",
                     confirmButtonText: "Confirm!",
+                    reverseButtons: true,
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({

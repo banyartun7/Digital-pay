@@ -18,6 +18,8 @@ use App\Http\Controllers\backend\DashboardController;
 Route::middleware('auth')->group(function () {
     Route::get('/', [PageController::class, 'index'])->name('home');  
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
+    Route::get('/update-password', [PageController::class, 'update_password'])->name('update_pass');
+    Route::post('/update-password', [PageController::class, 'store_password'])->name('update-pass.store');
 });
 
 
