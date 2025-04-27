@@ -58,7 +58,21 @@
 
 <nav class="navbar navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}"> @yield('header') </a>
+        @if(!request()->is('/'))
+        <i
+            class="fa-solid fa-circle-arrow-left btn-back"
+            style="font-size: 18px; color: #999999"
+        ></i>
+        @endif
+        <div class="mx-auto">
+            <a
+                class="navbar-brand"
+                style="padding-left: 50px"
+                href="{{ url('/') }}"
+            >
+                @yield('header')
+            </a>
+        </div>
         <div class="user-info">
             <i class="fa-solid fa-bell"></i>
 

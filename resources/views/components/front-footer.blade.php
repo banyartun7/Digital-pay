@@ -8,12 +8,22 @@
                         <span>Home</span>
                     </a>
                 </div>
-                <div class="scan icon-menu">
+
+                <div class="transfer icon-menu">
                     <a>
-                        <i class="fa-solid fa-qrcode font-icon pb-1"></i>
-                        <span>Scan</span>
+                        <i class="fa-solid font-icon pb-1 fa-money-bill-transfer"></i>
+                        <span>Transaction</span>
                     </a>
                 </div>
+
+
+                <a class="scan" href="#">
+                    <div class="inside">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+
+                </a>
+
                 <div class="account icon-menu">
                     <a href="{{ route('profile') }}">
                         <i class="fa-solid font-icon fa-user pb-1"></i>

@@ -56,6 +56,11 @@ body {
     transition: 0.2s;
 }
 
+.fa-circle-arrow-left:hover {
+    color: #51ccff !important;
+    transition: 0.2s;
+}
+
 .icon-menu:hover span {
     color: #51ccff;
     transition: 0.2s;
@@ -63,16 +68,21 @@ body {
 
 .font-icon {
     font-size: 18px;
-    color: #999999;
+    color: #0a0a0a;
 }
 
 .icon-menu a span {
-    color: #999999;
+    color: #0a0a0a;
 }
 
 .fa-bell {
     font-size: 18px;
     color: blue;
+}
+
+.fa-bell:hover {
+    color: rgb(11, 0, 133) !important;
+    transition: 0.2s;
 }
 
 .navbar {
@@ -84,7 +94,7 @@ body {
 }
 
 .user-info {
-    width: 100px;
+    width: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,6 +105,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.navbar-brand {
+    margin: 0 auto;
 }
 
 a {
@@ -162,4 +176,46 @@ a {
 .cover img {
     width: 300px;
     height: 200px;
+}
+
+.scan {
+    background-color: #f0f1f3;
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65px;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 35px;
+}
+
+.scan .inside {
+    background-color: white;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: grow 5s infinite;
+    border-radius: 100%;
+}
+
+.fa-qrcode {
+    font-size: 20px;
+}
+
+@keyframes grow {
+    0% {
+        box-shadow: 0 0 -10px #5842e3;
+    }
+    40% {
+        box-shadow: 0 0 15px #5842e3;
+    }
+    60% {
+        box-shadow: 0 0 15px #5842e3;
+    }
+    100% {
+        box-shadow: 0 0 -10px #5842e3;
+    }
 }

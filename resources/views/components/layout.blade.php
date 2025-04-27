@@ -68,6 +68,12 @@
                     title: "{{ session('create') }}"
                 });
             @endif
+
+            $('.btn-back').on('click', function(e) {
+                e.preventDefault();
+                window.history.go(-1);
+                return false;
+            })
         });
     </script>
     @yield('script')
