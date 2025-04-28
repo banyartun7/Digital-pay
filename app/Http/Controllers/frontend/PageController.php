@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -33,5 +34,10 @@ class PageController extends Controller
             return redirect('/profile')->with('create', "Successfully updated");
         }
         return back()->withErrors(['old_pass'=>'The old password is not corret!']);
+    }
+
+    public function wallet(){
+        $user = auth()->guard('web')->user();
+        return view('frontend.wallet', compact('user'));
     }
 }

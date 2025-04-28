@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="bot">
             <div class="bot-menu">
                 <div class="home icon-menu">
                     <a href="/">
@@ -31,7 +31,7 @@
                     </a>
                 </div>
                 <div class="wallet icon-menu">
-                    <a>
+                    <a href="{{ route('wallet') }}">
                         <i class="fa-solid font-icon fa-wallet pb-1"></i>
                         <span>Wallet</span>
                     </a>

@@ -29,18 +29,21 @@ body {
     transition: 0.2s;
 } */
 
-.bot-menu {
+.bot {
     background-color: #ffffff;
     bottom: 0;
     position: fixed;
     left: 0;
     right: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.bot-menu {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
     max-width: 900px;
-    border-radius: 10px 10px 0 0;
 }
 
 .icon-menu {
@@ -85,7 +88,7 @@ body {
     transition: 0.2s;
 }
 
-.navbar {
+.navbar .container {
     margin: 0 auto;
     max-width: 900px;
     position: sticky;
@@ -119,9 +122,18 @@ a {
     text-align: center;
 }
 
+.profile span {
+    color: rgb(104, 104, 104);
+}
+
+.profile p {
+    font-size: 17px;
+    margin-bottom: 5px !important;
+}
+
 .profile img {
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
     border-radius: 50%;
     padding: 5px;
     border: 1px solid #ddd;
@@ -131,6 +143,11 @@ a {
 .main {
     max-width: 900px;
     margin: 0 auto;
+}
+
+.py-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .text-select {
@@ -203,6 +220,30 @@ a {
 
 .fa-qrcode {
     font-size: 20px;
+}
+
+.wallet-card {
+    background-color: #5842e3;
+    color: #ffffff;
+}
+
+.wallet-card .mb-4 span {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.wallet-card .mb-4 p {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.mmk {
+    font-size: 13px !important;
 }
 
 @keyframes grow {

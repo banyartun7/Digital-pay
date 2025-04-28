@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
     Route::get('/update-password', [PageController::class, 'update_password'])->name('update_pass');
     Route::post('/update-password', [PageController::class, 'store_password'])->name('update-pass.store');
+    Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet');
 });
 
 
