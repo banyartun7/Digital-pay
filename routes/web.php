@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/update-password', [PageController::class, 'update_password'])->name('update_pass');
     Route::post('/update-password', [PageController::class, 'store_password'])->name('update-pass.store');
     Route::get('/wallet', [PageController::class, 'wallet'])->name('wallet');
+    Route::get('/transfer', [PageController::class, 'transfer'])->name('transfer');
+    Route::get('/verify', [PageController::class, 'toVerifyAccount'])->name('verify');
+    Route::post('/confirm-transfer', [PageController::class, 'confirm_transfer'])->name('confirm_transfer');
 });
 
 

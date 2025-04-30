@@ -145,6 +145,37 @@ a {
     margin: 0 auto;
 }
 
+.transfer-group {
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+    padding-top: 15px;
+    margin: 0 auto;
+}
+
+.bot-home {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.home-icon {
+    width: 200px;
+    cursor: pointer;
+}
+
+.text-muted {
+    color: rgb(139, 139, 139) !important;
+}
+
+.home-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.home-group span {
+    padding-left: 10px;
+}
+
 .py-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -154,6 +185,12 @@ a {
     cursor: pointer;
     user-select: none;
     color: #111827;
+}
+
+.text-select img {
+    width: 30px;
+    margin-right: 12px;
+    height: 30px;
 }
 
 .update {
@@ -244,6 +281,21 @@ a {
 
 .mmk {
     font-size: 13px !important;
+}
+
+.from {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 13px;
+}
+
+.from span {
+    padding-bottom: 5px;
+}
+
+.from p {
+    margin-bottom: 0;
+    padding-bottom: 10px;
 }
 
 @keyframes grow {

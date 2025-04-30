@@ -26,7 +26,7 @@ class AdminUserUpdateRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:255',
             'email' => ['required', 'email', 'min:10', Rule::unique('admin_users', 'email')->ignore($id)],
-            'phone' => ['required', 'min:9', 'numeric', Rule::unique('admin_users', 'phone')->ignore($id)],
+            'phone' => ['required', 'min:9', 'max:20', 'numeric', Rule::unique('admin_users', 'phone')->ignore($id)],
         ];
     }
 }

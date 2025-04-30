@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:255',
             'email' => ['required', 'email', 'min:10', Rule::unique('users', 'email')->ignore($id)],
-            'phone' => ['required', 'min:9', 'numeric', Rule::unique('users', 'phone')->ignore($id)],
+            'phone' => ['required', 'min:9', 'max:20', 'numeric', Rule::unique('users', 'phone')->ignore($id)],
         ];
     }
 }

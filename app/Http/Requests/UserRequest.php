@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:255',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'min:9', 'numeric', Rule::unique('users', 'phone')],
+            'phone' => ['required', 'min:9', 'max:20', 'numeric', Rule::unique('users', 'phone')],
             'password' => 'required|min:8'
         ];
     }
