@@ -56,17 +56,21 @@ class PageController extends Controller
         $amount = $request->amount;
         $note = $request->note;
         $current_time = date("Y-m-d H:i:s");
-        $check_to = User::where('phone', $to)->first();
+        $to_user = User::where('phone', $to)->first();
 
         if($amount < 1000){
             return back()->withErrors(['amount' => 'The amount mush be at least 1000 MMK'])->withInput();
         }
+
+        if($user->phone == $to){
+            return back()->withErrors(['to' => 'You cannot transfer money to yourself!'])->withInput();
+        }
         
-        if($check_to == null){
+        if($to_user == null){
             return back()->withErrors(['to' => 'Phone number is invalid!'])->withInput();
         }
 
-        return view('frontend.confirm_transfer', compact('to','amount', 'note', 'user', 'current_time'));
+        return view('frontend.confirm_transfer', compact('to_user','amount', 'note', 'user', 'current_time'));
     }
 
     public  function toVerifyAccount(Request $request){
@@ -85,6 +89,64 @@ class PageController extends Controller
         return response()->json([
             'status' => 'fail',
             'message' => 'Invalid data!'
+        ]);
+        
+    }
+
+    public function complete_transfer(TransferRequest $request){
+        $user = auth()->guard('web')->user();
+        $to = $request->to;
+        $amount = $request->amount;
+        $note = $request->note;
+        $to_user = User::where('phone', $to)->first();
+        if($amount < 1000){
+            return back()->withErrors(['fail' => 'The amount mush be at least 1000 MMK'])->withInput();
+        }
+
+        if($user->phone == $to){
+            return back()->withErrors(['fail' => 'You cannot transfer money to yourself!'])->withInput();
+        }
+        
+        if($to_user == null){
+            return back()->withErrors(['fail' => 'Phone number is invalid!'])->withInput();
+        }
+
+        if(!$user->wallet || !$to_user->wallet){
+            return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
+        }
+
+        $from_account_wallet = $user->wallet;
+        $from_account_wallet->decrement('amount', $amount);
+        $from_account_wallet->update();
+
+        $to_account_wallet = $to_user->wallet;
+        $to_account_wallet->increment('amount', $amount);
+        $to_account_wallet->update();
+
+        return redirect('/');
+
+    }
+
+    public function password_check(Request $request){
+        $authUser = auth()->guard('web')->user();
+
+        if(empty($request->password)){
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Please fill your password!'
+            ]);
+        }
+
+        if (Hash::check($request->password, $authUser->password)) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Password is correct!'
+            ]); 
+        }
+
+        return response()->json([
+            'status' => 'fail',
+            'message' => 'Password is incorrect!'
         ]);
         
     }

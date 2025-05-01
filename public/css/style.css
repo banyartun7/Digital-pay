@@ -119,6 +119,7 @@ a {
 }
 
 .profile {
+    padding-top: 15px;
     text-align: center;
 }
 
@@ -296,6 +297,11 @@ a {
 .from p {
     margin-bottom: 0;
     padding-bottom: 10px;
+}
+
+.py {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 @keyframes grow {

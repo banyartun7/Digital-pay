@@ -8,9 +8,7 @@
             <img src="{{ asset('images/security.png') }}" />
         </div>
 
-        @error('fail')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        <x-flash name="fail" />
         <form action="{{ route('update-pass.store') }}" method="POST">
             @csrf
             <div class="form-group mb-4">

@@ -9,8 +9,7 @@
             <span class="text-muted">{{ $user->name }}</span>
             <span class="text-muted">{{ $user->phone }}</span>
         </div>
-        <form action="{{ route('confirm_transfer') }}" method="POST">
-            @csrf
+        <form action="{{ route('confirm_transfer') }}" method="GET">
             <div class="To">
                 <div class="form-group mb-3">
                     <label for="to" class="mb-2">To <span class="verify-name"></span></label>
@@ -55,11 +54,11 @@
                         type: 'GET',
                         success: function(res) {
                             if (res.status == 'success') {
-                                $('.verify-name').text('(' + res.data['name'] + ')').addClass(
-                                    'text-success');
-                            } else {
-                                $('.verify-name').text('(' + res.message + ')').addClass(
+                                $('.verify-name').text('(' + res.data['name'] + ')').toggleClass(
                                     'text-danger');
+                            } else {
+                                $('.verify-name').text('(' + res.message + ')').toggleClass(
+                                    'text-success');
                             }
                         },
                     });

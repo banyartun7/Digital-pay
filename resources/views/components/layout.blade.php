@@ -30,7 +30,7 @@
     <div id="app">
         <x-nav />
 
-        <main class="main py-4">
+        <main class="main py">
             {{ $slot }}
         </main>
         <x-front-footer />
