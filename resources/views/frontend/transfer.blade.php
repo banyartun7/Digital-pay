@@ -54,11 +54,15 @@
                         type: 'GET',
                         success: function(res) {
                             if (res.status == 'success') {
-                                $('.verify-name').text('(' + res.data['name'] + ')').toggleClass(
+                                $('.verify-name').text('(' + res.data['name'] + ')').removeClass(
                                     'text-danger');
-                            } else {
-                                $('.verify-name').text('(' + res.message + ')').toggleClass(
+                                $('.verify-name').text('(' + res.data['name'] + ')').addClass(
                                     'text-success');
+                            } else {
+                                $('.verify-name').text('(' + res.message + ')').removeClass(
+                                    'text-success');
+                                $('.verify-name').text('(' + res.message + ')').addClass(
+                                    'text-danger');
                             }
                         },
                     });

@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="transfer icon-menu">
-                    <a>
+                    <a href={{ route('transaction') }}>
                         <i class="fa-solid font-icon pb-1 fa-money-bill-transfer"></i>
                         <span>Transaction</span>
                     </a>

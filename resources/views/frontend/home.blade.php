@@ -43,7 +43,7 @@
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
             <hr />
-            <a href="{{ route('update_pass') }}" class="d-flex text-select justify-content-between">
+            <a href="{{ route('transaction') }}" class="d-flex text-select justify-content-between">
                 <div>
                     <img src="{{ asset('images/transaction.png') }}" />
                     <span class="update">Transaction</span>

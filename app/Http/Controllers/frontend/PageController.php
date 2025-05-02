@@ -4,7 +4,10 @@ namespace App\Http\Controllers\frontend;
 
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Helpers\UUIDGenerate;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -115,16 +118,48 @@ class PageController extends Controller
             return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
         }
 
-        $from_account_wallet = $user->wallet;
-        $from_account_wallet->decrement('amount', $amount);
-        $from_account_wallet->update();
+        DB::beginTransaction();
+        try {
+            $from_account_wallet = $user->wallet;
+            $from_account_wallet->decrement('amount', $amount);
+            $from_account_wallet->update();
 
-        $to_account_wallet = $to_user->wallet;
-        $to_account_wallet->increment('amount', $amount);
-        $to_account_wallet->update();
+            $to_account_wallet = $to_user->wallet;
+            $to_account_wallet->increment('amount', $amount);
+            $to_account_wallet->update();
 
-        return redirect('/');
+            $ref_num = UUIDGenerate::refNum();
 
+            $from_account_transaction = new Transaction();
+            $from_account_transaction->ref_no = $ref_num;
+            $from_account_transaction->trx_id = UUIDGenerate::trxId();
+            $from_account_transaction->user_id = $user->id;
+            $from_account_transaction->type = 2;
+            $from_account_transaction->amount = $amount;
+            $from_account_transaction->source_id = $to_user->id;
+            $from_account_transaction->description = $note;
+            $from_account_transaction->save();
+
+            $to_account_transaction = new Transaction();
+            $to_account_transaction->ref_no = $ref_num;
+            $to_account_transaction->trx_id = UUIDGenerate::trxId();
+            $to_account_transaction->user_id = $to_user->id;
+            $to_account_transaction->type = 1;
+            $to_account_transaction->amount = $amount;
+            $to_account_transaction->source_id = $user->id;
+            $to_account_transaction->description = $note;
+            $to_account_transaction->save();
+
+            DB::commit();
+            return view('frontend.transaction');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
+        }
+    }
+
+    public function transaction(){
+        
     }
 
     public function password_check(Request $request){

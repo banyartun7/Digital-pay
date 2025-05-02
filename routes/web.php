@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/transfer/confirm', [PageController::class, 'confirm_transfer'])->name('confirm_transfer');
     Route::post('/transfer/complete', [PageController::class, 'complete_transfer'])->name('complete');
 
+    Route::get('/transaction', [PageController::class, 'transaction'])->name('transaction');
+    Route::get('/transaction/detail', [PageController::class, 'transactionDetail'])->name('transaction.detail');
+
     Route::get('/verify', [PageController::class, 'toVerifyAccount'])->name('verify');
     Route::get('/transfer/confirm/password-check', [PageController::class, 'password_check']);
 });
