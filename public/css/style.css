@@ -38,12 +38,40 @@ body {
     border-radius: 10px 10px 0 0;
 }
 
+.paginate {
+    margin-bottom: 95px !important;
+    position: sticky;
+}
+
+.transaction_card {
+    cursor: pointer;
+}
+
+.transaction_card:hover {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+        rgba(14, 30, 37, 0.32) 0px 2px 16px 0px !important;
+    transition: 0.2s;
+}
+
 .bot-menu {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
     max-width: 900px;
+}
+
+.transaction-profile img {
+    width: 75px;
+    height: 75px;
+}
+
+.lines {
+    margin: 0 !important;
+}
+
+.transaction-profile {
+    margin: 0 auto;
 }
 
 .icon-menu {
@@ -91,6 +119,12 @@ body {
 .navbar .container {
     margin: 0 auto;
     max-width: 900px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -157,6 +191,10 @@ a {
 .bot-home {
     max-width: 500px;
     margin: 0 auto;
+}
+
+.header-font {
+    font-size: 16px;
 }
 
 .home-icon {

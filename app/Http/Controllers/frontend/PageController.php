@@ -151,20 +151,27 @@ class PageController extends Controller
             $to_account_transaction->save();
 
             DB::commit();
-            return view('frontend.transaction');
+            return redirect('/');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
+            return back()->withErrors(['fail' => 'Something wrongs!'. $e->getMessage()] )->withInput();
         }
     }
 
     public function transaction(){
-        
+        $authUser = auth()->guard('web')->user();
+        $transactions = Transaction::orderBy('created_at', 'DESC')->where('user_id', $authUser->id)->paginate(5);
+        return view('frontend.transaction', compact('transactions', 'authUser'));
+    }
+
+    public function transactionDetail(Request $request){
+        $authUser = auth()->guard('web')->user();
+        $trxDetail = Transaction::where('user_id', $authUser->id)->where('trx_id', $request->trx_id)->first();
+        return view('frontend.transactionDetail', compact('trxDetail', 'authUser'));
     }
 
     public function password_check(Request $request){
         $authUser = auth()->guard('web')->user();
-
         if(empty($request->password)){
             return response()->json([
                 'status' => 'fail',
