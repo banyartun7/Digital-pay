@@ -4,8 +4,13 @@
     </x-slot>
     @section('header', 'Transaction Details')
     <x-card-wrapper>
+        @if (session('transfer_success'))
+            <div class="alert text-center alert-success">
+                {{ session('transfer_success') }}
+            </div>
+        @endif
         <div class="transaction-profile mb-3">
-            <img src="{{ asset('images/transactions.png') }}" />
+            <img src="{{ asset('images/mobile-payment.png') }}" />
         </div>
         <p
             class="text-center @if ($trxDetail->type == 1) text-success

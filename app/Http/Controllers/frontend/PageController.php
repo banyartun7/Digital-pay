@@ -151,16 +151,23 @@ class PageController extends Controller
             $to_account_transaction->save();
 
             DB::commit();
-            return redirect('/');
+            return redirect('/transaction/detail?trx_id='.$from_account_transaction->trx_id)->with('transfer_success', 'Transfered success');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['fail' => 'Something wrongs!'. $e->getMessage()] )->withInput();
         }
     }
 
-    public function transaction(){
+    public function transaction(Request $request){
         $authUser = auth()->guard('web')->user();
-        $transactions = Transaction::orderBy('created_at', 'DESC')->where('user_id', $authUser->id)->paginate(5);
+        $transactions = Transaction::orderBy('created_at', 'DESC')->where('user_id', $authUser->id);
+
+        if($request->type){
+          $transactions = $transactions->where('type', $request->type);
+        }
+
+        $transactions = $transactions->paginate(4)->withQueryString();
+
         return view('frontend.transaction', compact('transactions', 'authUser'));
     }
 
