@@ -7,6 +7,7 @@ use App\Models\Wallet;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Helpers\UUIDGenerate;
+use App\Helpers\EncryptDecrypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -59,8 +60,15 @@ class PageController extends Controller
         $amount = $request->amount;
         $note = $request->note;
         $current_time = date("Y-m-d H:i:s");
-        $to_user = User::where('phone', $to)->first();
 
+        $str = $to.$amount.$note;
+        $hash_value2 = hash_hmac('sha256', $str, 'digitalpayment');
+        if($hash_value2 !== $request->hash_value){
+            return back()->withErrors(['fail' => 'The given data is invalid'])->withInput();
+        }
+
+        $to_user = User::where('phone', $to)->first();
+        $hash_value = $request->hash_value;
         if($amount < 1000){
             return back()->withErrors(['amount' => 'The amount mush be at least 1000 MMK'])->withInput();
         }
@@ -73,7 +81,15 @@ class PageController extends Controller
             return back()->withErrors(['to' => 'Phone number is invalid!'])->withInput();
         }
 
-        return view('frontend.confirm_transfer', compact('to_user','amount', 'note', 'user', 'current_time'));
+        if(!$user->wallet || !$to_user->wallet){
+            return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
+        }
+
+        if($user->wallet->amount < $amount){
+            return back()->withErrors(['amount' => 'The amount is not enough to transfer!'])->withInput();
+        }
+
+        return view('frontend.confirm_transfer', compact('to_user', 'hash_value', 'amount', 'note', 'user', 'current_time'));
     }
 
     public  function toVerifyAccount(Request $request){
@@ -102,6 +118,13 @@ class PageController extends Controller
         $amount = $request->amount;
         $note = $request->note;
         $to_user = User::where('phone', $to)->first();
+
+        $str = $to.$amount.$note;
+        $hash_value2 = hash_hmac('sha256', $str, 'digitalpayment');
+        if($hash_value2 !== $request->hash_value){
+            return back()->withErrors(['fail' => 'The given data is invalid'])->withInput();
+        }
+
         if($amount < 1000){
             return back()->withErrors(['fail' => 'The amount mush be at least 1000 MMK'])->withInput();
         }
@@ -116,6 +139,10 @@ class PageController extends Controller
 
         if(!$user->wallet || !$to_user->wallet){
             return back()->withErrors(['fail' => 'Something wrongs!'])->withInput();
+        }
+
+        if($user->wallet->amount < $amount){
+            return back()->withErrors(['fail' => 'The amount is not enough to transfer!'])->withInput();
         }
 
         DB::beginTransaction();
@@ -166,6 +193,10 @@ class PageController extends Controller
           $transactions = $transactions->where('type', $request->type);
         }
 
+        if($request->date){
+            $transactions = $transactions->whereDate('created_at', $request->date);
+        }
+
         $transactions = $transactions->paginate(4)->withQueryString();
 
         return view('frontend.transaction', compact('transactions', 'authUser'));
@@ -198,5 +229,24 @@ class PageController extends Controller
             'message' => 'Password is incorrect!'
         ]);
         
+    }
+
+    public function transfer_hash(Request $request){
+        $str = $request->to.$request->amount.$request->note;
+        $hash_value = hash_hmac('sha256', $str, 'digitalpayment');
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $hash_value
+        ]);
+    }
+
+    public function receiveQr(){
+        $authUser = auth()->guard('web')->user();
+        return view('frontend.receive_qr', compact('authUser'));
+    }
+
+    public function scanPay(){
+        return view('frontend.scan_pay');
     }
 }

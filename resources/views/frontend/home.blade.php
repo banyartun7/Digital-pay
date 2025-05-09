@@ -11,19 +11,22 @@
         <span>{{ number_format($user->wallet ? $user->wallet->amount : 0) }} MMK</span>
     </div>
     <div class="transfer-group">
-        <x-card-wrapper class="home-icon">
-            <div class="home-group">
-                <img src="{{ asset('images/scan.png') }}" />
-                <span>Scan and Pay</span>
-            </div>
-        </x-card-wrapper>
-
-        <x-card-wrapper class="home-icon">
-            <div class="home-group">
-                <img src="{{ asset('images/receive.png') }}" />
-                <span>Receive QR</span>
-            </div>
-        </x-card-wrapper>
+        <a href="{{ route('scan_pay') }}">
+            <x-card-wrapper class="home-icon">
+                <div class="home-group">
+                    <img src="{{ asset('images/scan.png') }}" />
+                    <span>Scan and Pay</span>
+                </div>
+            </x-card-wrapper>
+        </a>
+        <a href="{{ route('receive_qr') }}">
+            <x-card-wrapper class="home-icon">
+                <div class="home-group">
+                    <img src="{{ asset('images/receive.png') }}" />
+                    <span>Receive QR</span>
+                </div>
+            </x-card-wrapper>
+        </a>
     </div>
     <div class="bot-home">
         <x-card-wrapper>

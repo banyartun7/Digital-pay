@@ -25,12 +25,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/transfer', [PageController::class, 'transfer'])->name('transfer');
     Route::get('/transfer/confirm', [PageController::class, 'confirm_transfer'])->name('confirm_transfer');
     Route::post('/transfer/complete', [PageController::class, 'complete_transfer'])->name('complete');
+    Route::get('/transfer/hash', [PageController::class, 'transfer_hash']);
 
     Route::get('/transaction', [PageController::class, 'transaction'])->name('transaction');
     Route::get('/transaction/detail', [PageController::class, 'transactionDetail'])->name('transaction.detail');
 
     Route::get('/verify', [PageController::class, 'toVerifyAccount'])->name('verify');
     Route::get('/transfer/confirm/password-check', [PageController::class, 'password_check']);
+
+    Route::get('/receive-qr', [PageController::class, 'receiveQr'])->name('receive_qr');
+
+    Route::get('/scan-pay', [PageController::class, 'scanPay'])->name('scan_pay');
 });
 
 

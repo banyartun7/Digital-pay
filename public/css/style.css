@@ -152,6 +152,16 @@ a {
     text-decoration: none;
 }
 
+.verify-btn {
+    background-color: #d9dad7;
+    color: #3e4a61;
+}
+
+.verify-btn:hover {
+    background-color: #d9dad7;
+    color: #1a2639;
+}
+
 .profile {
     padding-top: 15px;
     text-align: center;
@@ -200,6 +210,11 @@ a {
 .home-icon {
     width: 200px;
     cursor: pointer;
+}
+
+.home-icon:hover {
+    color: #51ccff !important;
+    transition: 0.2s;
 }
 
 .text-muted {

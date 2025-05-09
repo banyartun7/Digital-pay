@@ -7,6 +7,7 @@
     <x-card-wrapper>
         <form action="{{ route('complete') }}" method="POST" id="form">
             @csrf
+            <input type="hidden" name="hash_value" value="{{ $hash_value }}">
             <input type="hidden" name="to" value="{{ $to_user->phone }}" />
             <input type="hidden" name="amount" value="{{ $amount }}" />
             <input type="hidden" name="note" value="{{ $note }}" />
