@@ -87,6 +87,10 @@ body {
     transition: 0.2s;
 }
 
+.click_scan {
+    color: #183153;
+}
+
 .fa-circle-arrow-left:hover {
     color: #51ccff !important;
     transition: 0.2s;
@@ -284,6 +288,18 @@ a {
 .cover img {
     width: 300px;
     height: 200px;
+}
+
+.scanPhoto img {
+    width: 230px;
+}
+
+.scan-btn {
+    padding: 10px 25px;
+}
+
+.bi-upc-scan {
+    margin-right: 5px;
 }
 
 .scan {
