@@ -17,11 +17,11 @@
                         <form method="POST" class="register-form" id="login-form" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="your_email"><i class="zmdi zmdi-account material-icons-email"></i></label>
-                                <input type="email" class="@error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" id="your_email" placeholder="Your Email" required
-                                    autocomplete="email" autofocus />
-                                @error('email')
+                                <label for="your_phone"><i class="zmdi zmdi-account material-icons-phone"></i></label>
+                                <input type="text" class="@error('phone') is-invalid @enderror" name="phone"
+                                    value="{{ old('phone') }}" id="your_phone" placeholder="Your Phone no" required
+                                    autocomplete="phone" autofocus />
+                                @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

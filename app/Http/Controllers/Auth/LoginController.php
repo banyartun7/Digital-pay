@@ -51,6 +51,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function username()
+    {
+        return 'phone';
+    }
+
     protected function authenticated(Request $request, $user)
     {
         $user->ip = $request->ip();

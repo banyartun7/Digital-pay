@@ -17,7 +17,7 @@
                 </div>
 
 
-                <a class="scan" href="#">
+                <a class="scan" href="{{ route('scan_pay') }}">
                     <div class="inside">
                         <i class="fa-solid fa-qrcode"></i>
                     </div>

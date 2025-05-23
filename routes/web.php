@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/receive-qr', [PageController::class, 'receiveQr'])->name('receive_qr');
 
     Route::get('/scan-pay', [PageController::class, 'scanPay'])->name('scan_pay');
+    Route::get('/scan-pay-form', [PageController::class, 'scanPayForm'])->name('scan-pay-form');
+
+    Route::get('/transfer/scan_confirm', [PageController::class, 'scanConfirmTransfer'])->name('scan_confirm_transfer');
+    Route::post('/transfer/scan_complete', [PageController::class, 'scanComplete'])->name('scan-pay-complete');
 });
 
 

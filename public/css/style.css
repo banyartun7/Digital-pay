@@ -294,6 +294,10 @@ a {
     width: 230px;
 }
 
+.video-style {
+    width: 100%;
+}
+
 .scan-btn {
     padding: 10px 25px;
 }
