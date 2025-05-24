@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\PageController;
 use App\Http\Controllers\auth\AdminUserController;
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\frontend\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transfer/scan_confirm', [PageController::class, 'scanConfirmTransfer'])->name('scan_confirm_transfer');
     Route::post('/transfer/scan_complete', [PageController::class, 'scanComplete'])->name('scan-pay-complete');
+
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
+    Route::get('/notification/detail/{id}', [NotificationController::class, 'notificationDetail'])->name('noti_detail');
 });
 
 

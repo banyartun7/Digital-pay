@@ -13,7 +13,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\TransferRequest;
+use App\Notifications\GeneralNotification;
 use App\Http\Requests\UpdatePasswordRequest;
+use Illuminate\Support\Facades\Notification;
 
 class PageController extends Controller
 {
@@ -38,6 +40,15 @@ class PageController extends Controller
         if (Hash::check($old_password, $user->password)) {
             $user->password = Hash::make($new_password);
             $user->update();
+
+            $title = 'Changed Password!';
+            $message = 'Your account password is successfully updated!';
+            $source_id = $user->id;
+            $source_type = User::class;
+            $web_link = url('profile');
+
+            Notification::send([$user], new GeneralNotification($title, $message, $source_id, $source_type, $web_link));
+
             return redirect('/profile')->with('create', "Successfully updated");
         }
         return back()->withErrors(['old_pass'=>'The old password is not corret!']);

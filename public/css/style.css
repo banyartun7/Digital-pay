@@ -290,12 +290,29 @@ a {
     height: 200px;
 }
 
+.btn-noti {
+    width: 50%;
+}
+
+.cover_noti {
+    text-align: center;
+}
+
+.cover_noti img {
+    width: 300px;
+    height: 250px;
+}
+
 .scanPhoto img {
     width: 230px;
 }
 
 .video-style {
     width: 100%;
+}
+
+.noti-bell {
+    color: #28c7fa;
 }
 
 .scan-btn {

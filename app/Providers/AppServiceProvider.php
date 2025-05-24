@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();   
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
+        $unReadNotiCount = 0;
+        
+        View::share('key', 'value');
     }
 }

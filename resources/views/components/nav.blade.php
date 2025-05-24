@@ -9,7 +9,7 @@
             </a>
         </div>
         <div class="user-info">
-            <i class="fa-solid fa-bell"></i>
+            <a href="{{ route('notification') }}"><i class="fa-solid fa-bell"></i></a>
             @auth
                 <img width="42" class="rounded-circle"
                     src="https://ui-avatars.com/api/?name={{ auth()->guard('web')->user()->name }}" alt="" />
