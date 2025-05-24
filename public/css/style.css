@@ -298,6 +298,12 @@ a {
     text-align: center;
 }
 
+.unread-bell {
+    position: absolute;
+    top: 0;
+    padding: 3px 4px;
+}
+
 .cover_noti img {
     width: 300px;
     height: 250px;

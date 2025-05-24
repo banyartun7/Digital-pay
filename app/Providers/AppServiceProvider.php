@@ -25,8 +25,14 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();   
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
-        $unReadNotiCount = 0;
-        
-        View::share('key', 'value');
+
+        View::composer('*', function ($view) {
+            $unReadNotiCount = 0;
+            if(auth()->guard('web')->check()){
+                $unReadNotiCount = auth()->guard('web')->user()->unreadNotifications()->count();
+            }
+
+            $view->with('unReadNotiCount', $unReadNotiCount);
+        });
     }
 }

@@ -9,7 +9,8 @@
             </a>
         </div>
         <div class="user-info">
-            <a href="{{ route('notification') }}"><i class="fa-solid fa-bell"></i></a>
+            <a href="{{ route('notification') }}"><i class="fa-solid fa-bell"></i><span
+                    class="badge badge-pill unread-bell badge-danger">{{ $unReadNotiCount }}</span></a>
             @auth
                 <img width="42" class="rounded-circle"
                     src="https://ui-avatars.com/api/?name={{ auth()->guard('web')->user()->name }}" alt="" />
